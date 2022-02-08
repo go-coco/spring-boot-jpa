@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/main.css}">
+<link rel="stylesheet" th:href="@{/css/logjoin.css}">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<title>See 공간 : 우리의 공간을 보다</title>
+
+</head>
+<body>
+<script>
+	$(document).ready(function() {
+
+		console.log("loading");
+
+		function reqListener (res) {
+
+			const data = res.currentTarget.response;
+
+			let list = JSON.parse(data);
+
+			console.log(list);
+			console.log(list[0]);
+
+
+			let keys = Object.keys(list[0]);
+
+
+			console.log(keys);
+
+
+			let parent = document.querySelector('#list_today_sp');
+
+
+			for(let i=0; i< list.length; i++) {
+
+				let sp_list = document.createElement("div");
+				sp_list.setAttribute("class", "sp_list");
+				let img1 = document.createElement("img");
+				let link = document.createElement("a");
+				let name = document.createElement("span");
+				let capacity = document.createElement("span");
+				let address = document.createElement("span");
+				let cost = document.createElement("span");
+				let tags = document.createElement("span");
+
+				for (const [key, value] of Object.entries(list[i])) {
+					if(key === "spaceName") {
+						name.appendChild(document.createTextNode(value.toString()));
+						console.log(value);
+					}
+
+					if(key === "capacity") {
+						capacity.appendChild(document.createTextNode(value.toString()));
+						console.log(value);
+					}
+
+					if(key === "address1") {
+						address.appendChild(document.createTextNode(value.toString()));
+						console.log(value);
+					}
+
+					if(key === "cost") {
+						cost.appendChild(document.createTextNode(value.toString()));
+						console.log(value);
+					}
+
+					if(key === "img1") {
+						// TODO : value -> img src attr 로 변경
+						img1.setAttribute("alt", "이미지");
+						//img1.setAttribute("th:src", "'@{"+img1+"}'");
+						img1.setAttribute("th:src", "'@{/icon/party_room.jpg}'");
+						//img1.appendChild(document.createTextNode(value.toString()));
+
+						console.log(value);
+					}
+
+					if(key === "spaceId") {
+						// TODO : rest api 에 id 추가 & href = /api/v1/spaces/id
+						//link.setAttribute("href", "/api/v1/space/"+value.toString());
+						link.setAttribute("href", "/api/v1/space/28");
+						//link.appendChild(document.createTextNode(value.toString()));
+						console.log(value);
+					}
+
+					if(key === "tags") {
+						if(value != null)
+						for(let tag in tags) {
+
+							tags.appendChild(document.createTextNode(tag.toString()));
+							console.log(value);
+						}
+					}
+
+					name.setAttribute("class", "sp_tag");
+				//	let padding = document.createElement("div");
+				//	padding.setAttribute("class", "sp_list_img");
+					sp_list.appendChild(link);
+					sp_list.appendChild(img1);
+					sp_list.appendChild(name);
+					sp_list.appendChild(address);
+					sp_list.appendChild(tags);
+					sp_list.appendChild(cost);
+					sp_list.appendChild(capacity);
+
+					parent.appendChild(sp_list);
+
+				}
+			}
+
+
+
+		}
+
+		let oReq = new XMLHttpRequest();
+		oReq.addEventListener("load", reqListener);
+		oReq.open("GET", "http://localhost:8080/api/v1/spaces");
+		oReq.send();
+
+
+	});
+</script>
+<div class="wrap">
+	<div th:insert="~{fragments/header :: header}"> 	</div>
+	<div class="content_wrap">
+	<div class="main_wrap">
+		<section class="sp_type">
+			<h1>어떤 공간을 찾고 있나요?</h1>
+			<div class="sp_type_wrap">
+				<div>
+					<button class="sp_type_btn" onclick="location.href='/api/v1/spaces?type=PARTY'">
+						<img alt="파티룸" th:src="@{/icon/party_room.jpg}">
+						<div class="keyword">파티룸</div>
+					</button>
+				</div>
+				<div>
+					<button class="sp_type_btn" onclick="location.href='/api/v1/spaces?type=PRACTICE'">
+						<img alt="연습실" th:src="@{/icon/practice_room.jpg}">
+						<div class="keyword">연습실</div>
+					</button>
+				</div>
+				<div>
+					<button class="sp_type_btn" onclick="location.href='/api/v1/spaces?type=STUDIO'">
+						<img alt="촬영스튜디오" th:src="@{/icon/studio.jpg}">
+						<div class="keyword">촬영스튜디오</div>
+					</button>
+				</div>
+				<div>
+					<button class="sp_type_btn" onclick="location.href='/api/v1/spaces?type=CONFERENCE'">
+						<img alt="회의실" th:src="@{/icon/conference_room.jpg}">
+						<div class="keyword">회의실</div>
+					</button>
+				</div>
+			</div>
+		</section>
+		<section class="sp_recommend">
+			<h2>오늘의 추천 공간</h2>
+			<h3>뜨기 전에 먼저 예약하세요</h3>
+			<div class="list_today_sp" id="list_today_sp">
+
+				<div class="sp_list">
+				<a href="/api/v1/space/31">
+					<div class="sp_list_img">
+						<img id ="sp_img" th:src="@{/icon/party_room.jpg}" alt="image">
+					</div>
+					<div class="sp_info">
+						<h3 class="sp_info_tit"></h3>
+						<div class="sp_tags">
+							<h3> tags </h3>
+							<span class="tag_area_name">주소 </span>
+							<span>tag1 2 3</span>
+						</div>
+						<div class="sp_info_price_hour">
+							<strong class="price">가격</strong>
+							<span class="txt_unit">원/시간</span>
+						</div>
+						<div class="info_maxUser">
+							<img alt="최대이용가능수" th:src="@{/static/icon/user.jpg}" />
+							<span>수용인원</span>
+						</div>
+					</div>
+				</a>
+				</div>
+
+			</div>
+		</section>
+	</div>
+
+</div>
+	<div th:insert="~{fragments/footer :: footer}"> 	</div>
+
+</div>
+
+</body>
+</html>

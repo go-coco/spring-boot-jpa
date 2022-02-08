@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<link rel="stylesheet" th:href="@{/css/common.css}">
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+	<link rel="stylesheet" th:href="@{/css/sp_common.css}">
+	<title>HOST INFO</title>
+
+<script  src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(document).on("click", "#saveBtn", function(){
+		console.log("saveBtn >>> : ");
+		
+		$('#hostInfoInsert').attr({
+			'action':'hostInfo_Insert.sgg',
+			'method':'POST',
+			'enctype':'application/x-www-form-urlencoded'
+		}).submit();
+	});
+});
+</script>
+</head>
+<body>
+
+<div class="wrap">
+	<header class="header">
+		<div class="subheader_wrap">
+			<button class="btn_back" onclick="location.href='#'">
+				<img id="icon_back" alt="이전" th:src="@{/icon/back_y.jpg}" width="24">
+			</button>
+			<h2>호스트 정보</h2>
+			<button class="btn_menu" onclick="location.href='#'">
+				<img id="icon_menu" alt="메뉴" th:src="@{/icon/menu_bar_y.png}" width="24">
+			</button>
+		</div>
+	</header>
+<div class="content_wrap">
+<div class="heading">
+	<h3>연락처 정보	를 입력해주세요.</h3>
+	<div class="required">
+		<span class="required_s">*</span>
+		<span class="required_txt">필수입력</span>
+	</div>
+</div>
+<form name="hostInfoInsert" id="hostInfoInsert">
+			
+		
+	<!-- readonly을 사용해서 hostNum를 사용할 수 없게 만든다.-->
+	<input type="hidden" name="tbsp_num" id="tbsp_num" value="<%= tbsp_num %>">
+	<input type="hidden" name="tbh_num" id="tbsp_num" value="<%= hvo.getTBH_NUM() %>" >
+		<input type="hidden" name="tbh_num" id="tbh_num" value="session">
+		
+	<div class="title">이메일<span class="required_s">*</span></div>
+	<input type="text" name="tbh_email" id="tbh_email" value="" readonly>
+	
+	<div class="title">휴대폰<span class="required_s">*</span></div>
+	<input type="text" name="tbh_phone" id="tbh_phone" size="20">
+	
+	<div class="title">대표전화<span class="required_s">*</span></div>
+	<input type="text" name="tbsp_tel" id="tbsp_tel" size="20">
+	
+	<div class="sp_btn_bottom">
+		<span class="btn_wrap">
+			<input type="button" class="btn_prev" value="이전">
+		</span>
+		<span class="btn_wrap">
+			<input type="button" class="btn_next" id="saveBtn" value="저장">
+		</span>
+	</div>	
+	</form>
+</div>
+</div>
+</body>
+</html>

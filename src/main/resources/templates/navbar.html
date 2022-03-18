@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Page</title>
+
+<style type="text/css">
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+body {
+	font-weight: 500;
+}
+
+.wrapper {
+	display: flex;
+	text-align: center;
+}
+
+.mp_body {
+	background-color: white;
+	width: 40%;
+}
+
+.mp_blank {
+	width: 60%;
+}
+
+.mp_title {
+	background-color: #fed636;
+	height: 170px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.mp_list {
+	height: 50px;
+	font-size: 20px;
+	border-bottom: 1px solid;
+	border-color: silver;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.blue {
+	display: flex;
+	justify-content: center;
+	background-color: #6d3afb;
+	color: #fed636;
+}
+
+.bottom {
+	height: 200px;
+	background-color: #f6f6f6;
+	align-items: flex-start;
+	padding-top: 50px;
+	text-align: center;
+}
+
+.log_out{
+	font-size: 20px;
+	margin-bottom: 30px;
+}
+
+.home{
+	color: #704de5;
+}
+</style>
+</head>
+<body>
+	<div class="header_wrapper">
+		<div th:insert="~{fragments/header :: header}"> 	</div>
+	</div>
+	<div class="wrapper">
+		<div class="mp_body">
+			<div class="mp_title">
+				<h2>마이페이지</h2>
+			</div>
+			<div class="mp_list home" onclick="location.href='main.jsp'" style="cursor: pointer;">
+				<span>시공간 홈</span><span>></span>
+			</div>
+			<div class="mp_list" onclick="location.href='myinfo.sgg'" style="cursor: pointer;">
+				<span>프로필 관리</span><span>></span>
+			</div>
+			<div class="mp_list" onclick="location.href='/booking/bookHisSelect.sgg'" style="cursor: pointer;">
+				<span>예약 리스트</span><span>></span>
+			</div>
+			<div class="mp_list" onclick="location.href='noticeSelectAllPage.sgg'" style="cursor: pointer;">
+				<span>공지사항</span><span>></span>
+			</div>
+			<div class="mp_list" onclick="location.href='oneSelectAllU.sgg?onemnum=<%=mnum%>'" style="cursor: pointer;">
+				<span>1:1문의</span><span>></span>
+			</div>
+			<div class="bottom">
+				<div class="log_out" style="cursor: pointer;">
+					<a href="logOut.sgg">로그아웃</a>
+				</div>
+				<div>Powered by © SEE0GAN Corp.</div>
+			</div>
+			<div class="mp_list blue" style="cursor: pointer;">
+				<a href="/host/hostCenter.sgg">호스트센터로 이동</a>
+			</div>
+		</div>
+		<div class="mp_blank"></div>
+		<div th:insert="~{fragments/footer :: footer}"> 	</div>
+	</div>
+</body>
+</html>

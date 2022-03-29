@@ -1,6 +1,7 @@
 package com.see0gan.space.entity;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -48,33 +49,28 @@ public class Space {
             generator = "space_sequence"
     )
     private Long spaceId;
-   
     
-    private String spaceName;    
-    
-    private SpaceType type;
-    
-    private String intro1;
-    
-    private String intro2;
-    
-    private Integer capacity;
-    
-    // TODO : file upload
-    private String img1;
-    
-    private String img2;
-    
-    private LocalDate regDate;
-    
-    private Integer price;
-    
-    @Embedded
-    private RefundPolicy refund;
     
     private boolean deleted;
-
+    private LocalDate regDate;
     
+    private String spaceName;   
+    private SpaceType type;
+    private Integer capacity;
+    
+    private String intro1;    
+    private String intro2;    
+   
+    
+    // TODO : file upload
+    private String img1;    
+    private String img2;
+    
+    
+    private Integer price;    
+    @Embedded
+    private RefundPolicy refund;
+   
     
     @ManyToOne(
     		fetch = FetchType.LAZY,
@@ -90,20 +86,27 @@ public class Space {
     private Host host;
     
   
-    @OneToOne( fetch = FetchType.LAZY, mappedBy = "spaceId")
+    @OneToOne( 
+    		fetch = FetchType.LAZY,
+    		mappedBy = "spaceId"
+    )
     private Location address;
     
+    // tags
+    private String tag1;
+    private String tag2;
+    private String tag3;
     
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "spaceId")
-    private SpaceCustomTag tag;
+    // space_facility
+    private boolean hasAirConditioner;
+    private boolean hasPrinter;
+    private boolean hasFreeWifi;
+    private boolean hasParkingLot;
     
-    
-    @OneToOne(
-    		fetch = FetchType.LAZY, mappedBy = "space")
-    private SpaceFacility facility;
-  
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "space")
-    private SpaceOpenTime openingHour;
+    // space_open_time
+    private LocalTime openTime;
+    private LocalTime closeTime;
+    private String holiday; 
 
 
     @OneToMany(
@@ -112,7 +115,10 @@ public class Space {
     @JsonManagedReference(value = "space-closure")
     private Set<TemporaryClosure> closures;
     
-    @OneToMany(mappedBy = "space")
+    
+    @OneToMany(
+    		fetch = FetchType.LAZY, mappedBy = "space"
+    		)
     @JsonManagedReference(value = "space-booking")
     private Set<Booking> booking;
 

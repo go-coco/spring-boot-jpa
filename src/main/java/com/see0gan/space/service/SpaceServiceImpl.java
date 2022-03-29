@@ -25,6 +25,8 @@ import com.see0gan.utils.exception.ResourceNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
+// TODO : make it to CustomRepository
+// TODO : make service conversion only 
 @Service("SpaceService")
 @RequiredArgsConstructor
 public class SpaceServiceImpl implements SpaceService{
@@ -112,17 +114,17 @@ return null;
     	address.setSpaceId(space);
     	entityManager.persist(address);
     	
-    	SpaceCustomTag tags = spaceInfo.getTags();
-    	tags.setSpaceId(space);
-    	entityManager.persist(tags);
-    	
-    	SpaceOpenTime sot = spaceInfo.getOpenTime();
-    	sot.setSpace(space);
-    	entityManager.persist(sot);
-    	
-    	SpaceFacility facility = spaceInfo.getFacility();
-    	facility.setSpace(space);    	
-    	entityManager.persist(facility);
+//    	SpaceCustomTag tags = spaceInfo.getTags();
+//    	tags.setSpaceId(space);
+//    	entityManager.persist(tags);
+//    	
+//    	SpaceOpenTime sot = spaceInfo.getOpenTime();
+//    	sot.setSpace(space);
+//    	entityManager.persist(sot);
+//    	
+//    	SpaceFacility facility = spaceInfo.getFacility();
+//    	facility.setSpace(space);    	
+//    	entityManager.persist(facility);
     	
      	entityManager.flush();
     	
@@ -137,7 +139,8 @@ return null;
         spaceRepository.findById(spaceDto.getSpaceId())
                 .ifPresentOrElse( found -> spaceRepository.save(fromDto(spaceDto)),
                 		()-> new NoSuchElementException("no space with id"));
-
+        
+        // need to update related table having request's spaceId
     }
     
     private static Space fromDto(SpaceForm spaceDto) {

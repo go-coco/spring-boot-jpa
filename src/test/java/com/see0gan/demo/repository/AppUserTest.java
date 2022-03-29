@@ -1,11 +1,12 @@
 package com.see0gan.demo.repository;
 
 
-import com.see0gan.demo.auth.AppUserRepository;
-import com.see0gan.demo.auth.ApplicationUser;
-import com.see0gan.demo.auth.ApplicationUserService;
-import com.see0gan.demo.registration.token.ConfirmationTokenService;
-import com.see0gan.demo.security.ApplicationUserRole;
+import com.see0gan.user.auth.AppUserRepository;
+import com.see0gan.user.auth.ApplicationUser;
+import com.see0gan.user.auth.ApplicationUserService;
+import com.see0gan.user.registration.token.ConfirmationTokenService;
+import com.see0gan.user.security.ApplicationUserRole;
+
 import lombok.AllArgsConstructor;
 import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;

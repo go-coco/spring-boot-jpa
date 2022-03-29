@@ -1,25 +1,48 @@
 package com.see0gan.demo.repository;
 
 
-import com.see0gan.demo.dto.SpaceDto;
-import com.see0gan.demo.entity.*;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.List;
 
-@SpringBootTest
-//@DataJpaTest
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import com.see0gan.space.entity.Host;
+import com.see0gan.space.entity.RefundPolicy;
+import com.see0gan.space.entity.Space;
+import com.see0gan.space.entity.SpaceCustomTag;
+import com.see0gan.space.entity.SpaceFacility;
+import com.see0gan.space.entity.SpaceOpenTime;
+import com.see0gan.space.entity.SpaceType;
+import com.see0gan.space.repository.HostRepository;
+import com.see0gan.space.repository.SpaceRepository;
+
+@DataJpaTest
 public class SpaceRepositoryTest {
 
     @Autowired
     private SpaceRepository spaceRepository;
     private HostRepository hostRepository;
+    
+    @AfterEach
+    void tearDown() {
+    	spaceRepository.deleteAll();
+     }   
+    
+    @Test
+    void itShouldCheckIfOpenTimeIsAvailable() {
+    	
+    	// given
+    	//Space space = new Space("test space", );
+    	//spaceRepository.save(space);
+    	// when
+    	spaceRepository.findAByOrderByPriceAsc(null) ;
+    	// then
+    }
 
     @Test
     public void saveSpace(){
@@ -42,8 +65,8 @@ public class SpaceRepositoryTest {
         Space space =
                 Space.builder()
                         .spaceName("churche")
-                        .address1("Seoul")
-                        .address2("sadang station")
+   //                     .address1("Seoul")
+     //                   .address2("sadang station")
                         .capacity(1000)
                         .img1("ch/img1")
                         .img2("ch/img2")
@@ -52,8 +75,8 @@ public class SpaceRepositoryTest {
         Space space1 =
                 Space.builder()
                         .spaceName("homey")
-                        .address1("Incheon")
-                        .address2("oido station")
+       //                 .address1("Incheon")
+        //                .address2("oido station")
                         .capacity(10)
                         .img1("home/img1")
                         .img2("home/img2")
@@ -65,8 +88,8 @@ public class SpaceRepositoryTest {
                 Space.builder()
                         .spaceName("M studio")
                         .type(SpaceType.STUDIO)
-                        .address1("Seoul")
-                        .address2("digital station")
+//                        .address1("Seoul")
+//                        .address2("digital station")
                         .capacity(10)
                         .img1("m/img1")
                         .img2("m/img2")
@@ -96,8 +119,8 @@ public class SpaceRepositoryTest {
         Space newSpace = Space.builder()
                 .spaceName("A office")
                 .type(SpaceType.STUDIO)
-                .address1("Seoul")
-                .address2("gangnam station")
+           //     .address1("Seoul")
+      //          .address2("gangnam station")
                 .capacity(100)
                 .img1("j/img1")
                 .img2("j/img2")
@@ -145,10 +168,10 @@ public class SpaceRepositoryTest {
                 .before1(0)
                 .build();
 
-        SpaceOpeningHour time = SpaceOpeningHour.builder()
-                .openingTime(LocalTime.of(9, 30))
+        SpaceOpenTime time = SpaceOpenTime.builder()
+                .openTime(LocalTime.of(9, 30))
                 .closeTime(LocalTime.of(23, 00))
-                .holiday(LocalDate.of(2022,Month.JANUARY, 1))
+                .holiday("MON")
                 .build();
 
         Space space = Space.builder()
@@ -157,8 +180,8 @@ public class SpaceRepositoryTest {
                 .tag(tags)
                 .host(newHost)
                 .facility(facility)
-                .address1("Ansan")
-                .address2("Banwol")
+       //         .address1("Ansan")
+        //        .address2("Banwol")
                 .intro1("hello guys, this is your dream PC room")
                 .intro2("free drink for newbie")
                 .img1("pub/img1")
@@ -175,8 +198,8 @@ public class SpaceRepositoryTest {
     @Test
     public void findByType(){
 
-        List<Space> list =
-        spaceRepository.findByType(SpaceType.STUDIO);
+        List<Space> list = null;
+    //    spaceRepository.findByType(SpaceType.STUDIO);
 
         System.out.println(list.size());
         System.out.println("list = " + list);

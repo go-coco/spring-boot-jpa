@@ -1,7 +1,8 @@
 package com.see0gan.demo.service;
 
-import com.see0gan.demo.email.EmailService;
-import com.see0gan.demo.registration.RegistrationService;
+import com.see0gan.user.registration.RegistrationService;
+import com.see0gan.utils.email.EmailService;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

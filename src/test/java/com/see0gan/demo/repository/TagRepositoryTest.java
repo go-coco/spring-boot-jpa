@@ -1,9 +1,11 @@
 package com.see0gan.demo.repository;
 
-import com.see0gan.demo.entity.Host;
-import com.see0gan.demo.entity.Space;
-import com.see0gan.demo.entity.SpaceCustomTag;
-import com.see0gan.demo.entity.SpaceType;
+import com.see0gan.space.entity.Host;
+import com.see0gan.space.entity.Space;
+import com.see0gan.space.entity.SpaceCustomTag;
+import com.see0gan.space.entity.SpaceType;
+import com.see0gan.space.repository.SpaceCustomTagRepository;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,8 +32,8 @@ public class TagRepositoryTest {
         Space newSpace = Space.builder()
                 .spaceName("L Party house")
                 .type(SpaceType.PARTY)
-                .address1("Seoul")
-                .address2("gangnam station")
+         //       .address1("Seoul")
+      //          .address2("gangnam station")
                 .capacity(100)
                 .img1("j/img1")
                 .img2("j/img2")
@@ -44,7 +46,7 @@ public class TagRepositoryTest {
                 .tag1("swimming pool")
                 .tag2("free wifi")
                 .tag3("parking")
-                .space(newSpace)
+      //          .space(newSpace)
                 .build();
 
 

@@ -1,15 +1,24 @@
 package com.see0gan.demo.controller;
 
-import com.see0gan.demo.entity.SpaceFacility;
-import com.see0gan.demo.service.FacilityService;
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-@RestController
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.see0gan.space.entity.SpaceFacility;
+import com.see0gan.space.service.FacilityService;
+
+import lombok.RequiredArgsConstructor;
+
+//@RestController
 @RequestMapping(path="api/v1/spaces/facilities")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FacilityController {
 
     private final FacilityService facilityService;

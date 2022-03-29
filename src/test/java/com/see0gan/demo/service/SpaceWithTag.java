@@ -1,6 +1,7 @@
 package com.see0gan.demo.service;
 
-import com.see0gan.demo.entity.SpaceCustomTag;
+import com.see0gan.space.entity.SpaceCustomTag;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

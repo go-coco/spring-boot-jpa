@@ -1,9 +1,10 @@
 package com.see0gan.demo.controller;
 
 
-import com.see0gan.demo.dto.SpaceWithTag;
-import com.see0gan.demo.entity.SpaceCustomTag;
-import com.see0gan.demo.service.TagService;
+import com.see0gan.space.dto.SpaceWithTag;
+import com.see0gan.space.entity.SpaceCustomTag;
+import com.see0gan.space.service.TagService;
+
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

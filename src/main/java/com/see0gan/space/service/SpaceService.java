@@ -13,7 +13,7 @@ import com.see0gan.space.entity.Space;
 public interface SpaceService {
 	
 	
-    Page<Space> findSpacesByType(String type, Pageable pageable);
+   // Page<Space> findSpacesByType(String type, Pageable pageable);
 
     Page<Space> getSpaces(Pageable pageable);
 

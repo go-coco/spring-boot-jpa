@@ -35,7 +35,7 @@ public class Location {
 	@JoinColumn(name = "SPACE_ID", referencedColumnName = "spaceId")
 	@JsonBackReference
 	@MapsId
-	private Space spaceId;
+	private Space space;
     
 	
 	

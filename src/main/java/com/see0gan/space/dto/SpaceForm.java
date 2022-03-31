@@ -1,16 +1,7 @@
 package com.see0gan.space.dto;
 
-import javax.persistence.Embedded;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.see0gan.space.entity.Host;
 import com.see0gan.space.entity.Location;
-import com.see0gan.space.entity.RefundPolicy;
-import com.see0gan.space.entity.SpaceCustomTag;
-import com.see0gan.space.entity.SpaceFacility;
-import com.see0gan.space.entity.SpaceOpenTime;
-import com.see0gan.space.entity.SpaceType;
 
 import lombok.Data;
 
@@ -30,11 +21,9 @@ public class SpaceForm extends SpaceDto{
 //   @JsonBackReference
     private Host host;
     private Location address;
-    private SpaceFacility facility;
-    private SpaceCustomTag tags;
-    private SpaceOpenTime openTime;
+  //  private SpaceFacility facility;
     
-   
+ 
 //    private boolean printer;
 //
 //    private boolean airCon;

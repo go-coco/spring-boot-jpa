@@ -1,12 +1,12 @@
 package com.see0gan.demo.controller;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.see0gan.space.dto.SpaceForm;
 import com.see0gan.space.entity.Space;
 import com.see0gan.space.entity.TemporaryClosure;
-import com.see0gan.space.service.SpaceService;
 import com.see0gan.space.service.SpaceServiceImpl;
 import com.see0gan.user.auth.ApplicationUser;
-import com.see0gan.utils.exception.ResourceNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -62,6 +60,16 @@ public class SpaceController {
 	//	return ResponseEntity.created(location).build();
 
 		return null;
+	}
+	
+	@DeleteMapping(path = "{space_id}")
+	public ResponseEntity<?> deleteSpace(@PathVariable("space_id") Long space_id){
+		
+		spaceService.deleteSpaceById(space_id);
+		
+		//	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 

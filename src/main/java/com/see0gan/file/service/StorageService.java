@@ -1,4 +1,4 @@
-package com.see0gan.space.service;
+package com.see0gan.file.service;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;

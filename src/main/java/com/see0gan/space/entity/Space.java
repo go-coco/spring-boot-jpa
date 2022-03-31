@@ -2,6 +2,7 @@ package com.see0gan.space.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -22,11 +23,13 @@ import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.see0gan.booking.entity.Booking;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -56,41 +59,16 @@ public class Space {
     
     private String spaceName;   
     private SpaceType type;
-    private Integer capacity;
-    
+    private Integer capacity;    
     private String intro1;    
     private String intro2;    
-   
-    
-    // TODO : file upload
-    private String img1;    
-    private String img2;
-    
-    
     private Integer price;    
     @Embedded
     private RefundPolicy refund;
-   
     
-    @ManyToOne(
-    		fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-          ,  optional = false
-    )
-    @JoinColumn(
-            name = "host_id",
-            referencedColumnName = "hostId",
-            nullable=false
-    )
-    @JsonBackReference
-    private Host host;
-    
-  
-    @OneToOne( 
-    		fetch = FetchType.LAZY,
-    		mappedBy = "spaceId"
-    )
-    private Location address;
+    // TODO : file upload service
+    private String img1;    
+    private String img2;
     
     // tags
     private String tag1;
@@ -108,6 +86,28 @@ public class Space {
     private LocalTime closeTime;
     private String holiday; 
 
+    // relation-mapping
+    
+    @ManyToOne(
+    		fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+          ,  optional = false
+    )
+    @JoinColumn(
+            name = "host_id",
+            referencedColumnName = "hostId",
+            nullable=false
+    )
+    @JsonBackReference
+    private Host host;
+    
+    
+    @OneToOne( 
+    		fetch = FetchType.LAZY,
+    		mappedBy = "space"
+    )
+    private Location address;
+    
 
     @OneToMany(
     		fetch = FetchType.LAZY,	mappedBy = "space"
@@ -121,5 +121,58 @@ public class Space {
     		)
     @JsonManagedReference(value = "space-booking")
     private Set<Booking> booking;
+    
+    
+    @JsonProperty("hasAirConditioner")
+    public boolean hasAirConditioner() {
+        return hasAirConditioner;
+    }
+    @JsonProperty("hasPrinter")
+    public boolean hasPrinter() {
+        return hasPrinter;
+    }
+    @JsonProperty("hasFreeWifi")
+    public boolean hasFreeWifi() {
+        return hasFreeWifi;
+    }
+    @JsonProperty("hasParkingLot")
+    public boolean hasParkingLot() {
+        return hasParkingLot;
+    }
 
+    public void setHasAirConditioner(boolean hasAirConditioner) {
+        this.hasAirConditioner = hasAirConditioner;
+    }
+
+    public void setHasPrinter(boolean hasPrinter) {
+        this.hasPrinter = hasPrinter;
+    }
+
+    public void setHasFreeWifi(boolean hasFreeWifi) {
+        this.hasFreeWifi = hasFreeWifi;
+    }
+
+    public void setHasParkingLot(boolean hasParkingLot) {
+        this.hasParkingLot = hasParkingLot;
+    }
+    
+    
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Space other = (Space) obj;
+		return Objects.equals(spaceId, other.spaceId);
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(spaceId);
+	}
+    
+    
+    
 }

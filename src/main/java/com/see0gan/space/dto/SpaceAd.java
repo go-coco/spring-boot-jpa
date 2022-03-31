@@ -2,7 +2,6 @@ package com.see0gan.space.dto;
 
 
 import com.see0gan.space.entity.Location;
-import com.see0gan.space.entity.SpaceCustomTag;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +17,7 @@ public class SpaceAd {
     private Integer capacity;
     private Location address;
     private Integer price;
-    private SpaceCustomTag tags;
+    //private SpaceCustomTag tags;
 
 
 }

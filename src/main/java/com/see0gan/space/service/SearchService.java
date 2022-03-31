@@ -21,6 +21,12 @@ public interface SearchService {
 	Page<Space> getSpacesByFacilitiesHaving();
 	
 	Page<Space> getSpacesByLocation(String city, Pageable pageable);
+	
+	Page<Space> findSpacesByType(String type, Pageable pageable);
+	
+	 Page<Space> findAByOrderByPriceAsc(Pageable pageable);
+	    
+	    Page<Space> findByOrderByPriceDesc(Pageable pageable);
 
 	
 }

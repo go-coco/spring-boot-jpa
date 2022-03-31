@@ -46,7 +46,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/index", "/hostCenter", "/css/**", "/icon/**", "/join", "/api/v1/registration/**").permitAll()
                 .antMatchers( "/space/registration/**").hasRole(HOST.name())
                 .antMatchers( "/userprofile/**").hasAnyRole(GUEST.name(), HOST.name())
-                .antMatchers(HttpMethod.GET, "/api/v*/spaces/**").permitAll()
+                .antMatchers("/api/v*/spaces/**").permitAll()
                 .antMatchers("/api/v2/hosts/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/v*/spaces/**").hasAuthority(SPACE_WRITE.name())
                 .antMatchers(HttpMethod.DELETE, "/api/v1/spaces/**").hasAuthority(SPACE_WRITE.name())
